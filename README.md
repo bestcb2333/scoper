@@ -1,4 +1,4 @@
-That's the original code:
+That's the code simplified by scoper:
 ```go
 var companies []Company
 db.Preload("Users", scoper.NewScope(
@@ -11,7 +11,7 @@ db.Preload("Users", scoper.NewScope(
 )).Find(&companies).Error
 ```
 
-You can simplify it like this:
+That's the original code:
 ```go
 var companies []Company
 db.Preload("Users", func(db *gorm.DB) *gorm.DB {
