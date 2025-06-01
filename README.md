@@ -1,12 +1,14 @@
 That's the code simplified by scoper:
 ```go
+import s "github.com/bestcb2333/scoper"
+
 var companies []Company
-db.Preload("Users", scoper.NewScope(
-  scoper.WithSelect("id", "name", "avatar", "company_id"),
-  scoper.WithWhere("gender = ?", "male"),
-  scoper.WithPreload("Comments",
-    scoper.WithSelect("id", "title", "user_id"),
-    scoper.WithWhere("topic = ?", "environment"),
+db.Preload("Users", s.NewScope(
+  s.Select("id", "name", "avatar", "company_id"),
+  s.Where("gender = ?", "male"),
+  s.Preload("Comments",
+    s.Select("id", "title", "user_id"),
+    s.Where("topic = ?", "environment"),
   ),
 )).Find(&companies).Error
 ```

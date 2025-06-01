@@ -17,64 +17,64 @@ func NewScope(options ...ScopeOption) func(*gorm.DB) *gorm.DB {
 	}
 }
 
-// WithSelect 设置查询字段
-func WithSelect(fields ...string) ScopeOption {
+// Select 设置查询字段
+func Select(fields ...string) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Select(fields)
 	}
 }
 
-// WithWhere 添加where条件
-func WithWhere(query interface{}, args ...interface{}) ScopeOption {
+// Where 添加where条件
+func Where(query interface{}, args ...interface{}) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Where(query, args...)
 	}
 }
 
-// WithLimit 设置查询限制数量
-func WithLimit(limit int) ScopeOption {
+// Limit 设置查询限制数量
+func Limit(limit int) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Limit(limit)
 	}
 }
 
-// WithOffset 设置查询偏移量
-func WithOffset(offset int) ScopeOption {
+// Offset 设置查询偏移量
+func Offset(offset int) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Offset(offset)
 	}
 }
 
-// WithOrder 设置排序
-func WithOrder(order string) ScopeOption {
+// Order 设置排序
+func Order(order string) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Order(order)
 	}
 }
 
-// WithGroup 设置分组
-func WithGroup(group string) ScopeOption {
+// Group 设置分组
+func Group(group string) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Group(group)
 	}
 }
 
-// WithHaving 设置having条件
-func WithHaving(query interface{}, args ...interface{}) ScopeOption {
+// Having 设置having条件
+func Having(query interface{}, args ...interface{}) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Having(query, args...)
 	}
 }
 
-// WithJoins 设置join连接
-func WithJoins(query string, args ...interface{}) ScopeOption {
+// Joins 设置join连接
+func Joins(query string, args ...interface{}) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Joins(query, args...)
 	}
 }
 
-// WithPreload 设置预加载关联，支持嵌套选项
-func WithPreload(association string, options ...ScopeOption) ScopeOption {
+// Preload 设置预加载关联，支持嵌套选项
+func Preload(association string, options ...ScopeOption) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(options) > 0 {
 			// 如果有嵌套选项，创建一个组合的scope函数
@@ -85,8 +85,8 @@ func WithPreload(association string, options ...ScopeOption) ScopeOption {
 	}
 }
 
-// WithDistinct 设置去重
-func WithDistinct(columns ...string) ScopeOption {
+// Distinct 设置去重
+func Distinct(columns ...string) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		if len(columns) > 0 {
 			return db.Distinct(columns)
@@ -95,15 +95,15 @@ func WithDistinct(columns ...string) ScopeOption {
 	}
 }
 
-// WithOmit 忽略指定字段
-func WithOmit(columns ...string) ScopeOption {
+// Omit 忽略指定字段
+func Omit(columns ...string) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Omit(columns...)
 	}
 }
 
-// WithScopes 应用其他自定义scope
-func WithScopes(scopes ...func(*gorm.DB) *gorm.DB) ScopeOption {
+// Scopes 应用其他自定义scope
+func Scopes(scopes ...func(*gorm.DB) *gorm.DB) ScopeOption {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Scopes(scopes...)
 	}
